@@ -22,8 +22,8 @@ def read_text(path):
     return data.decode("utf-8")
 
 
-def prepare(mode, request, page_url):
-    """Format a user-visible manual handoff; labels do not select a model."""
+def prepare(mode, request, page_url, session_id=None):
+    """Format a manual handoff, reusing a UUID string when supplied."""
     if any(char.isspace() or ord(char) < 32 or ord(char) == 127 for char in page_url):
         raise ValueError("Page URL must not contain whitespace or control characters")
     url = urlsplit(page_url)
@@ -33,9 +33,18 @@ def prepare(mode, request, page_url):
         raise ValueError("provide a canonical https://chatgpt.com/space/page_... URL")
     if not request.strip():
         raise ValueError("request must not be empty")
+    if session_id is None:
+        session_id = str(uuid4())
+    else:
+        if not isinstance(session_id, str):
+            raise ValueError("session_id must be a UUID string")
+        try:
+            session_id = str(UUID(session_id))
+        except ValueError:
+            raise ValueError("session_id must be a UUID string") from None
     return (
         "Start a Jdot session\n\n"
-        f"Session ID: {uuid4()}\n"
+        f"Session ID: {session_id}\n"
         f"Memory Page: {page_url}\n"
         f"Requested Shortcuts mode: {MODES[mode]}\n\n"
         "This text has not been sent. The mode above is a requested label, not proof "
@@ -88,12 +97,16 @@ def main():
     handoff.add_argument("--mode", choices=MODES, required=True)
     handoff.add_argument("--request-file", required=True)
     handoff.add_argument("--page-url", required=True)
+    handoff.add_argument("--session-id", metavar="UUID",
+                         help="reuse an existing session UUID when regenerating a handoff; "
+                              "omit to create a new session")
     summary = commands.add_parser("check-summary", help="validate JSON without saving it")
     summary.add_argument("path")
     args = parser.parse_args()
     try:
         if args.command == "prepare":
-            print(prepare(args.mode, read_text(args.request_file), args.page_url), end="")
+            print(prepare(args.mode, read_text(args.request_file), args.page_url,
+                          session_id=args.session_id), end="")
         else:
             print(json.dumps(check_summary(json.loads(read_text(args.path))), sort_keys=True))
     except (OSError, ValueError, UnicodeError) as exc:
