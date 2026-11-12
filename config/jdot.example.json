@@ -1,0 +1,9 @@
+{
+  "memory_page_url": null,
+  "timezone": "Etc/UTC",
+  "summary": {
+    "min_bullets": 3,
+    "max_bullets": 5,
+    "max_words": 120
+  }
+}

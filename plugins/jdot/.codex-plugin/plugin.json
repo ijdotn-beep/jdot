@@ -1,0 +1,19 @@
+{
+  "name": "jdot",
+  "version": "0.1.0",
+  "description": "Start Page-connected Jdot sessions, retain concise factual memory, and prepare explicit Apple Shortcuts handoffs.",
+  "author": {"name": "ijdotn-beep"},
+  "repository": "https://github.com/ijdotn-beep/jdot",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Jdot",
+    "shortDescription": "Personal memory for Jdot",
+    "longDescription": "A personal session workflow using an authorized ChatGPT Page for concise memory. Includes guidance for adapting Apple Shortcuts with explicit model selection and a manual Codex Remote handoff. Pages tools and account access must already be available in the host. Background execution and automatic remote forwarding are not provided.",
+    "developerName": "ijdotn-beep",
+    "category": "Productivity",
+    "capabilities": ["Resume Page-connected Jdot sessions", "Record short factual session summaries", "Prepare manual Shortcut handoffs"],
+    "defaultPrompt": ["Start a Jdot session", "Save this Jdot session summary", "Help adapt my existing Shortcut for Jdot"],
+    "logo": "./assets/logo-light.svg",
+    "composerIcon": "./assets/icon.svg"
+  }
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Jdot session"
+  short_description: "Resume Jdot with Page memory"
+  default_prompt: "Start a Jdot session using my memory Page"
+policy:
+  allow_implicit_invocation: true

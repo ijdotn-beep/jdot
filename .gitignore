@@ -1,0 +1,10 @@
+.jdot/
+.env
+.env.*
+dist/
+__pycache__/
+*.py[cod]
+*.shortcut
+*.wflow
+.venv/
+.DS_Store

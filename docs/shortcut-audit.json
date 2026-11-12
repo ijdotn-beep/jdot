@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "source_name": "Use Model.shortcut",
+  "source_sha256": "04de8b4e8c19ae28a3257cd845c627cd1c3f1bd15d8081b73a529a50e017d97a",
+  "source_bytes": 26983,
+  "container": "AEA1",
+  "profile": 0,
+  "status": "recovered_unverified",
+  "signature_verified": false,
+  "recovery": "One bounded LZVN block decoded with lzfse 0.4.2.post1; validated narrow AA01 empty root plus one exact-sized Shortcut.wflow; parsed binary plist. The skill-bundled inspector was unavailable in this host.",
+  "actions": [
+    {"step": 1, "kind": "Use Model", "model_selection": "Ask", "saved_prompt": "empty"},
+    {"step": 2, "kind": "Use Model", "model_selection": "Ask", "saved_prompt": "previous step response", "source_step": 1, "reference_match_count": 1}
+  ],
+  "remote_handoff_present": false,
+  "pages_memory_present": false,
+  "automation_declared": false,
+  "original_included_in_repository": false
+}
