@@ -31,7 +31,10 @@ Completion checks:
 - A forget request covers current context and matching retained summaries, with any tool-imposed history limit reported
 - A failed save leaves a clear unsaved summary instead of a false success claim
 
-The current offline validator checks record shape and length; it does not implement these remote delivery guarantees.
+The offline handoff tool supports `prepare --session-id UUID` to preserve a
+session's identity when regenerating its text. The summary validator checks record
+shape and length. Neither implements these remote delivery guarantees; uncertain
+Page saves still require reconciliation by the connected agent.
 
 ## Stage 5 Optional dashboard and maintenance
 

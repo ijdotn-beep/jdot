@@ -49,7 +49,28 @@ python3 scripts/jdot_handoff.py prepare \
 
 Use `cloud` or `cloud-pro` for the other requested modes. The mode labels describe the intended Shortcut choice; the CLI does not route inference. Review the resulting text, copy it to the intended Page-connected Jdot session, and use the installed Remote-opening action if your device offers one.
 
-Reuse the saved handoff when retrying the same session. Each new `prepare` invocation generates a new session ID.
+Reuse the saved handoff when retrying the same session. If you need to regenerate
+the text, set `JDOT_SESSION_ID` to the `Session ID` from the earlier handoff and
+pass it explicitly:
+
+```sh
+python3 scripts/jdot_handoff.py prepare \
+  --mode on-device \
+  --request-file .jdot/request.txt \
+  --page-url "$JDOT_PAGE_URL" \
+  --session-id "$JDOT_SESSION_ID" > .jdot/handoff.retry.txt
+```
+
+Omitting `--session-id` generates a fresh UUIDv4 for a new session. A supplied ID
+is validated with Python's `uuid.UUID` parser and printed in lowercase hyphenated
+form, so equivalent UUID spellings produce the same handoff identity. Empty or
+invalid IDs produce an error on stderr, exit status 2, and no handoff on stdout.
+The Python API also accepts `prepare(mode, request, page_url, session_id=...)`;
+existing three-argument calls still generate a new ID.
+
+Reuse an ID only for the same conversation. Carry the emitted ID into its summary
+record and reconcile any uncertain Page save before retrying. A stable handoff ID
+supports that check; the CLI does not itself deduplicate summaries or save memory.
 
 For a summary prepared by the agent:
 
