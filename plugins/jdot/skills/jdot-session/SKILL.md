@@ -16,7 +16,9 @@ Keep continuity through a user-authorized Page. Model inference, Remote control,
 
 ## Save the session
 
-At the end of each connected Jdot session, append a dated summary with **3–5 short factual bullets totaling at most 120 words**. Use the user's timezone when known, otherwise UTC. Cover intent, confirmed decisions, completed work, unresolved items, and the next step as applicable. Keep proposals distinct from durable facts; do not fill missing facts with guesses.
+For Cadence prompt-optimization sessions, skip persistence of optimization content, including summaries, handoffs and local queues. If the session mixes tasks, exclude optimization details; if nothing eligible remains, skip the save and report that it was intentionally skipped. Host retention is separate.
+
+At the end of each eligible connected Jdot session, append a dated summary with **3–5 short factual bullets totaling at most 120 words**. Use the user's timezone when known, otherwise UTC. Cover intent, confirmed decisions, completed work, unresolved items, and the next step as applicable. Keep proposals distinct from durable facts; do not fill missing facts with guesses.
 
 Read current Page state before editing. Reuse returned Page/block IDs, hashes and sequences. Preserve unrelated content. Append the summary and update the current handoff together when supported. Reuse an incoming session identity and check for the existing summary before retrying an uncertain write. Inspect receipts and read back the saved change before saying memory was updated.
 
